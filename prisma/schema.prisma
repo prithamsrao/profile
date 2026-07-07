@@ -5,7 +5,7 @@ generator client {
 datasource db {
   // SQLite for zero-friction local dev. Switch to "postgresql" for production
   // and point DATABASE_URL at your hosted database.
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
