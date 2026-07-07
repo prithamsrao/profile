@@ -1,0 +1,81 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  // SQLite for zero-friction local dev. Switch to "postgresql" for production
+  // and point DATABASE_URL at your hosted database.
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Singleton row holding hero/intro content. Always id = 1.
+model Profile {
+  id        Int      @id @default(1)
+  name      String   @default("Your Name")
+  title     String   @default("Software Engineer")
+  bio       String   @default("Tell visitors who you are and what you build.")
+  location  String?
+  email     String?
+  github    String?
+  linkedin  String?
+  twitter   String?
+  website   String?
+  updatedAt DateTime @updatedAt
+}
+
+model Project {
+  id          String   @id @default(cuid())
+  title       String
+  summary     String
+  description String
+  coverImage  String?
+  techStack   String   // comma-separated tags, e.g. "Next.js,Prisma,TailwindCSS"
+  repoUrl     String?
+  demoUrl     String?
+  articleUrl  String?
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Education {
+  id          String   @id @default(cuid())
+  institution String
+  degree      String
+  field       String?
+  startDate   String   // free text, e.g. "2019" or "Aug 2019"
+  endDate     String?  // null/omitted = "Present"
+  description String?
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+}
+
+model Experience {
+  id          String   @id @default(cuid())
+  company     String
+  role        String
+  location    String?
+  startDate   String
+  endDate     String?
+  description String?
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+}
+
+model Skill {
+  id       String @id @default(cuid())
+  category String // e.g. "Languages", "Frameworks", "Tools"
+  name     String
+  order    Int    @default(0)
+}
+
+model Recommendation {
+  id        String   @id @default(cuid())
+  name      String
+  role      String   // e.g. "Engineering Manager at Acme" (their relationship to you)
+  quote     String
+  photo     String?
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+}

@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-base-border;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  ::selection {
+    background: rgba(45, 226, 230, 0.25);
+    color: #fff;
+  }
+  :focus-visible {
+    outline: 2px solid #2de2e6;
+    outline-offset: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@layer components {
+  /* Faint ambient grid -- signature backdrop texture, very low opacity */
+  .grid-backdrop {
+    background-image:
+      linear-gradient(rgba(45, 226, 230, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(45, 226, 230, 0.035) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  /* Section eyebrow label styled like a terminal path, e.g. "~/projects" */
+  .eyebrow {
+    @apply font-mono text-xs tracking-widest uppercase text-cyan;
+  }
+
+  /* Signature underline: draws in left-to-right like a scanning trace */
+  .scan-underline {
+    @apply relative inline-block;
+  }
+  .scan-underline::after {
+    content: "";
+    @apply absolute left-0 -bottom-1 h-[2px] w-full origin-left rounded-full;
+    background: linear-gradient(90deg, #2de2e6, #a855f7);
+    transform: scaleX(0);
+  }
+  .scan-underline.in-view::after {
+    animation: scan-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .card {
+    @apply relative rounded-xl border border-base-border bg-base-surface p-6 transition-all duration-300;
+  }
+  .card:hover {
+    @apply border-cyan/40 shadow-glow-cyan -translate-y-0.5;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 rounded-lg border border-cyan/40 bg-cyan/10 px-4 py-2
+           font-mono text-sm text-cyan transition-all duration-200 hover:bg-cyan/20 hover:shadow-glow-cyan;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 rounded-lg border border-base-border bg-base-surface2 px-4 py-2
+           font-mono text-sm text-ink-secondary transition-all duration-200 hover:text-ink-primary hover:border-violet/40;
+  }
+
+  .tag {
+    @apply rounded-full border border-base-border bg-base-surface2 px-2.5 py-1 font-mono text-[11px] text-ink-secondary;
+  }
+
+  .input {
+    @apply w-full rounded-lg border border-base-border bg-base-surface2 px-3 py-2 text-sm text-ink-primary
+           placeholder:text-ink-muted focus:border-cyan/50 focus:outline-none;
+  }
+}
