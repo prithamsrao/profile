@@ -3,15 +3,17 @@ generator client {
 }
 
 datasource db {
+
   // SQLite for zero-friction local dev. Switch to "postgresql" for production
   // and point DATABASE_URL at your hosted database.
+
+
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-// Singleton row holding hero/intro content. Always id = 1.
 model Profile {
-  id        Int      @id @default(1)
+  id        Int      @id @default(autoincrement())
   name      String   @default("Your Name")
   title     String   @default("Software Engineer")
   bio       String   @default("Tell visitors who you are and what you build.")
@@ -30,7 +32,7 @@ model Project {
   summary     String
   description String
   coverImage  String?
-  techStack   String   // comma-separated tags, e.g. "Next.js,Prisma,TailwindCSS"
+  techStack   String
   repoUrl     String?
   demoUrl     String?
   articleUrl  String?
@@ -44,8 +46,8 @@ model Education {
   institution String
   degree      String
   field       String?
-  startDate   String   // free text, e.g. "2019" or "Aug 2019"
-  endDate     String?  // null/omitted = "Present"
+  startDate   String
+  endDate     String?
   description String?
   order       Int      @default(0)
   createdAt   DateTime @default(now())
@@ -65,7 +67,7 @@ model Experience {
 
 model Skill {
   id       String @id @default(cuid())
-  category String // e.g. "Languages", "Frameworks", "Tools"
+  category String
   name     String
   order    Int    @default(0)
 }
@@ -73,7 +75,7 @@ model Skill {
 model Recommendation {
   id        String   @id @default(cuid())
   name      String
-  role      String   // e.g. "Engineering Manager at Acme" (their relationship to you)
+  role      String
   quote     String
   photo     String?
   order     Int      @default(0)
