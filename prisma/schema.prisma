@@ -14,9 +14,9 @@ datasource db {
 
 model Profile {
   id        Int      @id @default(autoincrement())
-  name      String   @default("Your Name")
-  title     String   @default("Software Engineer")
-  bio       String   @default("Tell visitors who you are and what you build.")
+  name      String   @default("Pritham S Rao")
+  title     String   @default("Computer Science Student")
+  bio       String   @default("Hey All!!, Welcome to my site..")
   location  String?
   email     String?
   github    String?
