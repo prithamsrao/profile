@@ -21,8 +21,8 @@ const jbMono = JetBrains_Mono({
 });
 
 export const metadata = {
-  title: "Alex Rivera — Portfolio",
-  description: "Full-stack engineer building fast, reliable web products.",
+  title: "Pritham S Rao",
+  description: "Computer Science Student.",
 };
 
 export default function RootLayout({ children }) {
