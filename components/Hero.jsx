@@ -13,15 +13,22 @@ export default function Hero({ profile }) {
   const [form, setForm] = useState(profile);
   const [saving, setSaving] = useState(false);
 
-  async function handleSave(e) {
+async function handleSave(e) {
     e.preventDefault();
     setSaving(true);
-    await fetch("/api/profile", {
+    const res = await fetch("/api/profile", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form),
     });
     setSaving(false);
+
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      alert(`Save failed: ${err.error || res.status}`);
+      return;
+    }
+
     setEditing(false);
     router.refresh();
   }
