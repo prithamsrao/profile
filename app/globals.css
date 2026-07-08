@@ -82,3 +82,34 @@
            placeholder:text-ink-muted focus:border-cyan/50 focus:outline-none;
   }
 }
+@layer components {
+  .aurora-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: -10;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .aurora-backdrop::before,
+  .aurora-backdrop::after {
+    content: "";
+    position: absolute;
+    width: 60vw;
+    height: 60vw;
+    max-width: 700px;
+    max-height: 700px;
+    border-radius: 9999px;
+    filter: blur(120px);
+    opacity: 0.16;
+  }
+  .aurora-backdrop::before {
+    top: -10%;
+    left: -10%;
+    background: radial-gradient(circle, #2de2e6, transparent 70%);
+  }
+  .aurora-backdrop::after {
+    bottom: -15%;
+    right: -10%;
+    background: radial-gradient(circle, #a855f7, transparent 70%);
+  }
+}
