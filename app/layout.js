@@ -29,6 +29,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable} ${jbMono.variable}`}>
       <body className="bg-base-bg text-ink-primary font-body antialiased">
+        <div className="aurora-backdrop" aria-hidden="true" />
         <Providers>{children}</Providers>
       </body>
     </html>
