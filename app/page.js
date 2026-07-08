@@ -8,6 +8,7 @@ import SkillsSection from "../components/SkillsSection";
 import RecommendationsSection from "../components/RecommendationsSection";
 import ContactSection from "../components/ContactSection";
 import Footer from "../components/Footer";
+import Reveal from "../components/Reveal";
 
 export const dynamic = "force-dynamic"; // always reflect latest host edits
 
@@ -26,12 +27,12 @@ export default async function HomePage() {
       <Nav name={profile.name} />
       <main>
         <Hero profile={profile} />
-        <ProjectsSection projects={projects} />
-        <ExperienceSection items={experience} />
-        <EducationSection items={education} />
-        <SkillsSection items={skills} />
-        <RecommendationsSection items={recommendations} />
-        <ContactSection profile={profile} />
+        <Reveal><ProjectsSection projects={projects} /></Reveal>
+        <Reveal><ExperienceSection items={experience} /></Reveal>
+        <Reveal><EducationSection items={education} /></Reveal>
+        <Reveal><SkillsSection items={skills} /></Reveal>
+        <Reveal><RecommendationsSection items={recommendations} /></Reveal>
+        <Reveal><ContactSection profile={profile} /></Reveal>
       </main>
       <Footer name={profile.name} />
     </>
